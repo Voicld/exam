@@ -9,7 +9,8 @@ namespace Supermarket
         public string Category { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        [JsonConstructor]
+
+        protected Product() { }
         protected Product(string name, string category, decimal price, int quantity)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name can't be empty.");
