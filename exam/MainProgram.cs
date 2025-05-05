@@ -13,7 +13,7 @@ namespace Supermarket
         public SupermarketApp(IProductDatabase database)
         {
             _database = database;
-            _database.OnProductAdded += message = Console.WriteLine(message);
+            _database.OnProductAdded += message => Console.WriteLine(message);
         }
 
         public void Run()

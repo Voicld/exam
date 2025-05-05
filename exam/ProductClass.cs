@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Supermarket
 {
@@ -8,7 +9,7 @@ namespace Supermarket
         public string Category { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-
+        [JsonConstructor]
         protected Product(string name, string category, decimal price, int quantity)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name can't be empty.");
@@ -36,7 +37,7 @@ namespace Supermarket
 
         public override string GetInfo()
         {
-            return $"{Name} ({Category}) - {Price:C} x {Quantity}, дійсний до: {ExpirationDate:yyyy-MM-dd}";
+            return $"{Name} ({Category}) - {Price:C} x {Quantity}, Consume due: {ExpirationDate:yyyy-MM-dd}";
         }
     }
 
