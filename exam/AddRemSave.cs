@@ -8,7 +8,7 @@ namespace Supermarket
 {
     public class ProductDatabase : IProductDatabase
     {
-        private readonly List<Product> _products = new();
+        private List<Product> _products = new();
 
         public event Action<string> OnProductAdded;
 
@@ -54,13 +54,13 @@ namespace Supermarket
 
         public void SaveToFile(string filePath)
         {
-            var json = JsonSerializer.Serialize(_products, new JsonSerializerOptions { WriteIndented = true });
+            var json = JsonSerializer.Serialize(_products);
             File.WriteAllText(filePath, json);
         }
 
         public void LoadFromFile(string filePath)
         {
-            if (File.Exists(filePath))
+            try
             {
                 var json = File.ReadAllText(filePath);
                 var products = JsonSerializer.Deserialize<List<Product>>(json);
@@ -69,6 +69,10 @@ namespace Supermarket
                     _products.Clear();
                     _products.AddRange(products);
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Deserialization error: " + ex.Message);
             }
         }
     }

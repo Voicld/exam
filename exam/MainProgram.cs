@@ -8,7 +8,7 @@ namespace Supermarket
 {
     public class SupermarketApp
     {
-        private readonly IProductDatabase _database;
+        private IProductDatabase _database;
 
         public SupermarketApp(IProductDatabase database)
         {
@@ -71,7 +71,7 @@ namespace Supermarket
             var category = Console.ReadLine();
 
             Console.Write("Price: ");
-            var price = decimal.Parse(Console.ReadLine() ?? "0");
+            var price = int.Parse(Console.ReadLine() ?? "0");
 
             Console.Write("Amount: ");
             var quantity = int.Parse(Console.ReadLine() ?? "0");
