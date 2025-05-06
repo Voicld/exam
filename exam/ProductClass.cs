@@ -30,7 +30,7 @@ namespace Supermarket
 
 
     }
-
+    
     public class FoodProduct : Product
     {
         public DateTime ExpirationDate { get; set; }
@@ -39,6 +39,10 @@ namespace Supermarket
             : base(name, category, price, quantity)
         {
             ExpirationDate = expirationDate;
+        }
+        public new string GetInfo()
+        {
+            return $"{Name} ({Category}) - Price: {Price}, Quantity: {Quantity}, Due: {ExpirationDate}";
         }
     }
 
