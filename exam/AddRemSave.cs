@@ -14,6 +14,8 @@ namespace Supermarket
 
         public void AddProduct(Product product)
         {
+            //Вмкористання Linq
+            
             var existingProduct = _products.FirstOrDefault(p => p.Name == product.Name);
             if (existingProduct != null)
             {
@@ -51,7 +53,7 @@ namespace Supermarket
         {
             return _products.OrderBy(p => p.Category).ThenBy(p => p.Name);
         }
-
+        //Серіалізація і десеріалізація
         public void SaveToFile(string filePath)
         {
             string json = JsonSerializer.Serialize(_products);
@@ -60,6 +62,7 @@ namespace Supermarket
 
         public void LoadFromFile(string filePath)
         {
+            
             try
             {
                 string json = File.ReadAllText(filePath);

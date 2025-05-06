@@ -30,7 +30,7 @@ namespace Supermarket
 
 
     }
-    
+    //Поліморфізм
     public class FoodProduct : Product
     {
         public DateTime ExpirationDate { get; set; }
