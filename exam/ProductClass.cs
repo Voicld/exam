@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace Supermarket
 {
-    public abstract class Product
+    [DataContract]
+    public class Product
     {
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public int Price { get; set; }
-        public int Quantity { get; set; }
+        [DataMember] public string Name { get; set; }
+        [DataMember] public string Category { get; set; }
+        [DataMember] public int Price { get; set; }
+        [DataMember] public int Quantity { get; set; }
 
-        [JsonConstructor]
+        public Product() { }
         public Product(string name, string category, int price, int quantity)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name can't be empty.");
@@ -21,8 +23,12 @@ namespace Supermarket
             Price = price;
             Quantity = quantity;
         }
+        public string GetInfo()
+        {
+            return $"{Name} ({Category}) - Price: {Price}, Quantity: {Quantity}";
+        }
 
-        public abstract string GetInfo();
+
     }
 
     public class FoodProduct : Product
@@ -34,22 +40,12 @@ namespace Supermarket
         {
             ExpirationDate = expirationDate;
         }
-
-        public override string GetInfo()
-        {
-            return $"{Name} ({Category}) - {Price:C} x {Quantity}, Consume due: {ExpirationDate:yyyy-MM-dd}";
-        }
     }
 
     public class HouseholdProduct : Product
     {
         public HouseholdProduct(string name, string category, int price, int quantity)
             : base(name, category, price, quantity) { }
-
-        public override string GetInfo()
-        {
-            return $"{Name} ({Category}) - {Price:C} x {Quantity}";
-        }
     }
 }
 

@@ -2,6 +2,7 @@
 
 namespace Supermarket
 {
+    //Інтерфейс
     public interface IProductDatabase
     {
         public event Action<string> OnProductAdded;
